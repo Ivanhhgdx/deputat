@@ -1,0 +1,26 @@
+<!doctype html>
+<html lang="ru">
+<head>
+<meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover">
+<meta name="theme-color" content="#0a0a0b"><meta name="robots" content="noindex,nofollow">
+<meta name="description" content="Личный рабочий кабинет Ивана Фомина. Сессии Канского окружного Совета, депутатские возможности и документы.">
+<title>Депутат — кабинет Ивана Фомина</title>
+<link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 64 64'%3E%3Crect width='64' height='64' rx='18' fill='%230b0b0b'/%3E%3Cpath d='M18 45V21h8v16l12-16h8v24h-8V29L26 45Z' fill='white'/%3E%3C/svg%3E">
+<link rel="stylesheet" href="style.css">
+</head>
+<body>
+<div class="backdrop" aria-hidden="true"></div>
+<div class="workspace">
+<aside class="sidebar">
+<a class="brand" href="#overview"><span class="brand-mark">д.</span><span>депутат<span class="brand-sub">ЛИЧНЫЙ КАБИНЕТ</span></span></a>
+<div class="nav-caption">РАБОЧЕЕ ПРОСТРАНСТВО</div>
+<nav aria-label="Основная навигация" id="navigation"></nav>
+<div class="sidebar-bottom"><div class="territory"><span class="tiny-star">✳</span><span>Канский округ<small>Красноярский край</small></span></div><button class="profile" data-detail="profile"><span class="avatar">ИФ</span><span>Иван Фомин<small>Руководитель фракции ЛДПР</small></span></button></div>
+</aside>
+<main id="main"><header class="topbar"><span id="breadcrumb">Обзор</span><div class="topbar-right"><time id="today"></time><button class="icon-button" id="search-open" aria-label="Поиск по кабинету"></button></div></header><div id="content"></div><footer><span>Канский окружной Совет · I созыв</span><button data-detail="sources">Сведения проверены 29.09.2026</button></footer></main>
+</div>
+<dialog id="detail-dialog" class="detail-dialog"><div class="dialog-top"><span class="eyebrow" id="dialog-label">СПРАВОЧНИК</span><button class="icon-button" id="dialog-close" aria-label="Закрыть"></button></div><div id="dialog-body"></div></dialog>
+<dialog id="search-dialog" class="search-dialog"><div class="search-row"><span id="search-icon"></span><input id="search-input" type="search" placeholder="Сессии, помощники, удостоверение…" aria-label="Поиск по кабинету"><button class="icon-button" id="search-close" aria-label="Закрыть поиск"></button></div><div id="search-results"></div></dialog>
+<div id="toast" role="status" aria-live="polite"></div>
+<script src="app.js"></script>
+</body></html>
