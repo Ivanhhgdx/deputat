@@ -5,3 +5,10 @@
 @media(prefers-reduced-motion:reduce){html{scroll-behavior:auto}.material-tile{transition:none}}
 @media print{.sidebar,.topbar,footer,.backdrop,.agenda-actions,.material-toolbar button{display:none!important}.workspace{display:block;margin:0;background:white;box-shadow:none}body,main{background:white;color:black}.card,.agenda-item{background:white;border:1px solid #ddd;break-inside:avoid}.material-section p,.card p{color:#333}textarea{color:black!important;background:white!important}}
 @media(max-width:720px){.sidebar nav{justify-content:flex-start;overflow-x:auto;scrollbar-width:thin;scrollbar-color:#5b616a transparent;scroll-snap-type:x proximity}.sidebar .nav-link{flex:0 0 83px;max-width:83px;scroll-snap-align:center;padding:10px 5px}.sidebar{padding:6px}.sidebar .nav-link span{font-size:10px;white-space:nowrap}.material-stats{gap:9px}}
+
+.material-read-state{display:flex;flex-wrap:wrap;align-items:center;gap:12px;margin:12px 0}
+.material-read-badge{font-size:12px;font-weight:700;border:1px solid currentColor;border-radius:999px;padding:4px 10px}
+.material-read-state.is-new .material-read-badge{color:#ffd479;background:rgba(255,212,121,.09)}
+.material-read-state.is-read .material-read-badge{color:#a8cdb4}
+.material-news{border-top:1px solid var(--line);padding:20px 0}
+@media(max-width:600px){.material-read-state .secondary-button{max-width:100%;white-space:normal;text-align:left}}
