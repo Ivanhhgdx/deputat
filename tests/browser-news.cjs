@@ -1,0 +1,31 @@
+const assert=require('node:assert/strict');
+const path=require('node:path');
+const fs=require('node:fs');
+const {chromium}=require(process.env.PLAYWRIGHT_PATH || 'playwright');
+(async()=>{
+ const browser=await chromium.launch({executablePath:process.env.CHROME_PATH,headless:true});
+ const context=await browser.newContext();
+ const legacy={read:['budget-may-1'],saved:['budget-may-1'],notes:{'budget-may-1':'KEEP PREVIOUS NOTE'},controls:{teachers:'working'}};
+ await context.addInitScript(state=>{if(!localStorage.getItem('deputat-materials-v1'))localStorage.setItem('deputat-materials-v1',JSON.stringify(state))},legacy);
+ const page=await context.newPage();const errors=[];page.on('pageerror',e=>errors.push(e.message));
+ const base=process.env.TEST_URL || 'http://127.0.0.1:4193/';
+ const id='news:kansk-chp-heat-tariff-2026-10-01';
+ const article=page.locator('#news-kansk-chp-heat-tariff-2026-10-01');
+ const button=page.locator(`[data-material-read="${id}"]`);
+ await page.goto(base+'#budget');await page.locator('[data-material-read="collection:budget"]').click();
+ const previousVersion=await page.evaluate(()=>localStorage.getItem('deputat-material-read-v1:collection:budget'));
+ await page.goto(base+'#materials');await article.waitFor();
+ assert.equal(await page.locator('.material-news').count(),1);
+ let text=await article.textContent();assert(text.includes('3 482,97 ₽/Гкал с НДС'));assert(text.includes('3 117,56 ₽/Гкал с НДС'));assert(text.includes('1 октября по 31 декабря 2026'));assert(text.includes('не распространяются на все котельные'));assert(text.includes('Дата публикации источника: не указана в источнике'));assert(text.includes('Дата события: 1 октября 2026'));assert(text.includes('Добавлено на сайт: 2 октября 2026'));assert(text.includes('поставщика конкретного дома'));
+ assert.equal(await article.locator('a').first().getAttribute('href'),'https://sibgenco.ru/upload/iblock/de2/bd0qmdabyrpnwn31l78bcjp86a3kiyvd.pdf');
+ assert.equal(await button.getAttribute('aria-pressed'),'false');
+ assert.equal(await article.locator('[role="status"]').textContent(),'Новое');
+ for(const width of [320,390,1280]){await page.setViewportSize({width,height:900});assert(await page.evaluate(()=>document.documentElement.scrollWidth<=innerWidth));}
+ await page.setViewportSize({width:390,height:900});await article.scrollIntoViewIfNeeded();await page.evaluate(()=>document.getAnimations().forEach(a=>a.finish()));
+ const evidence=process.env.EVIDENCE_DIR||path.resolve(__dirname,'../../deputat-evidence/tariff');fs.mkdirSync(evidence,{recursive:true});await article.screenshot({path:path.join(evidence,'tariff-new-mobile.png')});
+ await button.click();await page.reload();assert.equal(await button.getAttribute('aria-pressed'),'true');
+ const other=await context.newPage();await other.goto(base+'#materials');await other.locator(`[data-material-read="${id}"]`).click();await page.waitForFunction(id=>document.querySelector(`[data-material-read="${id}"]`).getAttribute('aria-pressed')==='false',id);
+ const state=await page.evaluate(()=>({old:localStorage.getItem('deputat-materials-v1'),budget:localStorage.getItem('deputat-material-read-v1:collection:budget')}));assert.equal(state.old,JSON.stringify(legacy));assert.equal(state.budget,previousVersion);
+ await page.goto(base+'#agendas');assert.equal(await page.locator('[data-material-read="budget-may-1"]').getAttribute('aria-pressed'),'true');assert.equal(await page.locator('[data-question-note="budget-may-1"]').inputValue(),legacy.notes['budget-may-1']);
+ assert.deepEqual(errors,[]);await browser.close();console.log('PASS: one verified tariff, unknown publication date, correct event/added dates, source link, fresh New, read/reload/unread across tabs, earlier read marks/notes retained, 320/390/1280 px; no page errors.');
+})().catch(e=>{console.error(e);process.exit(1)});

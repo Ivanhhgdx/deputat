@@ -33,6 +33,16 @@ const corrupt=boot({'deputat-materials-v1':'bad','deputat-material-read-v1:budge
 const denied=boot({},()=>{},true);denied.route('budget');denied.q('[data-material-read="collection:budget"]').click();assert.equal(denied.q('[data-material-read="collection:budget"]').getAttribute('aria-pressed'),'true');assert(denied.q('#toast').textContent.includes('Хранилище недоступно'));
 assert.throws(()=>boot({},w=>w.PUBLIC_MUNICIPAL_NEWS.push({...news,source:{name:'Bad',url:'javascript:alert(1)'}})),/Invalid public news/);
 assert.throws(()=>boot({},w=>w.PUBLIC_MUNICIPAL_NEWS.push({...news,publishedAt:'2026-02-31'})),/Invalid news date/);
-assert.equal(a.w.MaterialStatus.catalog.size,118);
+assert.equal(a.w.MaterialStatus.catalog.size,119);
+const actualId='news:kansk-chp-heat-tariff-2026-10-01';
+const actual=boot({'deputat-materials-v1':JSON.stringify(legacy)});actual.route('materials');
+assert.equal(actual.w.PUBLIC_MUNICIPAL_NEWS.length,1);
+const actualItem=actual.w.PUBLIC_MUNICIPAL_NEWS[0];assert.equal(actualItem.id,actualId);assert.equal(actualItem.publishedAt,null);assert.equal(actualItem.eventAt,'2026-10-01');assert.equal(actualItem.addedAt,'2026-10-02');
+assert.match(actual.q('.material-news').textContent,/3 482,97 ₽\/Гкал с НДС/);assert.match(actual.q('.material-news').textContent,/не распространяются на все котельные/);assert.match(actual.q('.material-news').textContent,/Дата публикации источника: не указана в источнике/);assert.match(actual.q('.material-news').textContent,/поставщика конкретного дома/);assert(!actual.q('.material-news').textContent.includes('Invalid Date'));
+assert.equal(actual.q(`[data-material-read="${actualId}"]`).getAttribute('aria-pressed'),'false');actual.q(`[data-material-read="${actualId}"]`).click();
+const actualReload=boot(actual.snapshot());actualReload.route('materials');assert.equal(actualReload.q(`[data-material-read="${actualId}"]`).getAttribute('aria-pressed'),'true');actualReload.route('agendas');assert.equal(actualReload.q('[data-material-read="budget-may-1"]').getAttribute('aria-pressed'),'true');assert.equal(actualReload.w.localStorage.getItem('deputat-materials-v1'),JSON.stringify(legacy));
+assert.throws(()=>boot({},w=>w.PUBLIC_MUNICIPAL_NEWS.push({...w.PUBLIC_MUNICIPAL_NEWS[0]})),/Duplicate material ID/);
+assert.throws(()=>boot({},w=>{delete w.PUBLIC_MUNICIPAL_NEWS[0].publishedAt}),/Invalid public news metadata/);
+actual.dom.window.close();actualReload.dom.window.close();
 for(const x of [a,revised,fresh,reloaded,updated,corrupt,denied])x.dom.window.close();
-console.log('PASS: legacy state unchanged, notes/selected retained, explicit read/unread, reload, content revisions, separate studied state, storage events, 12 routes, new public news, corrupt/denied storage, source/date validation.');
+console.log('PASS: legacy state unchanged, notes/selected retained, explicit read/unread, reload, content revisions, separate studied state, storage events, 12 routes, new public news, verified tariff with unknown publication date, duplicate rejection, other read marks retained, corrupt/denied storage, source/date validation.');

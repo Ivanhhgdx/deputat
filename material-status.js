@@ -25,14 +25,20 @@ window.MaterialStatus = (() => {
   ]) add('collection:' + route, {revision, data:keys.map(key=>data[key])}, route, title);
   for (const item of window.PUBLIC_MUNICIPAL_NEWS || []) {
     if (!/^news:[a-z0-9-]+$/.test(item.id) || !item.version ||
-        !/^\d{4}-\d{2}-\d{2}$/.test(item.publishedAt) ||
-        !/^\d{4}-\d{2}-\d{2}$/.test(item.updatedAt) ||
-        !item.addedAt || !item.source?.name || !/^https:\/\//.test(item.source.url) || !item.title || !item.summary)
+        !Object.hasOwn(item,'publishedAt') ||
+        !item.updatedAt || !item.addedAt || !item.source?.name ||
+        !item.title || !item.summary)
       throw new Error('Invalid public news metadata: ' + item.id);
-    const sourceURL=new URL(item.source.url);
-    if(sourceURL.username || sourceURL.password) throw new Error('News source must be a public URL');
-    for(const value of [item.publishedAt,item.updatedAt,item.addedAt])
-      if(!/^\d{4}-\d{2}-\d{2}$/.test(value) || !Number.isFinite(Date.parse(value)) || new Date(value).toISOString().slice(0,10)!==value)
+    for(const address of [item.source.url, ...(item.source.indexUrl?[item.source.indexUrl]:[])]) {
+      if(typeof address!=='string' || !/^https:\/\//.test(address)) throw new Error('Invalid public news source: '+item.id);
+      const sourceURL=new URL(address);
+      if(sourceURL.username || sourceURL.password) throw new Error('News source must be a public URL');
+    }
+    const dates=[item.updatedAt,item.addedAt];
+    if(item.publishedAt!==null) dates.push(item.publishedAt);
+    for(const value of [item.eventAt,item.source.checkedAt]) if(value!==undefined) dates.push(value);
+    for(const value of dates)
+      if(typeof value!=='string' || !/^\d{4}-\d{2}-\d{2}$/.test(value) || !Number.isFinite(Date.parse(value)) || new Date(value).toISOString().slice(0,10)!==value)
         throw new Error('Invalid news date: '+item.id);
     add(item.id, item, 'materials', item.title);
   }
