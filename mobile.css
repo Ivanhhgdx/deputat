@@ -41,6 +41,7 @@
  .mobile-tab:active .tab-icon{background:#ffffff10}
  body:has(input:focus,textarea:focus) .mobile-tabs{visibility:hidden}
  .page-heading{display:block;margin:0 0 22px}
+ .view{animation:none}
  .page-heading .eyebrow{font-size:10px;letter-spacing:1.3px;line-height:1.6;color:#8e9a9e}
  .page-heading h1{font-size:29px;font-weight:550;letter-spacing:-.9px;line-height:1.18;margin:7px 0 10px;overflow-wrap:anywhere}
  .page-heading p{font-size:14px;line-height:1.6;color:#9ca6af}
