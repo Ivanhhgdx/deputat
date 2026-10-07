@@ -261,7 +261,13 @@
  .timeline-card .icon-button{background:#ffffff12;color:white}
  .timeline-card .pill{background:#ffffff17;color:#cbddeb}.timeline-card .deadline-chip{color:#d0deea}
  .timeline-card .primary-button{background:#fff;color:#173653}.timeline-card input[type=range]{background:#4d627b;accent-color:#d3e4f5}
- .timeline-card .event-feature{padding-top:22px;border-color:#ffffff16}
+ .timeline-card .event-feature{padding-top:12px;margin-top:12px;gap:12px;border-color:#ffffff16}
+ .timeline-card .range-wrap{margin:24px 0 18px}
+ .timeline-card input[type=range]::-webkit-slider-thumb{background:#d5e7f6;box-shadow:0 0 0 6px #d5e7f615}
+ .timeline-card input[type=range]::-moz-range-thumb{background:#d5e7f6;border:0;box-shadow:0 0 0 6px #d5e7f615}
+ .schedule-toolbar{gap:8px;margin-bottom:15px}
+ .timeline-card .event-feature p{font-size:13px;line-height:1.45}
+ .timeline-card .event-feature h3{font-size:20px}
  .event-list{background:none;gap:10px;border-radius:0}.event-row{border-radius:22px;padding:19px 16px}
  .material-tile{position:relative;background:linear-gradient(140deg,#fff,#f0f4f9);border-radius:25px;padding:21px}
  .material-tile h2{font-size:20px}.material-tile p{font-size:13px}.material-tile .material-index{font-size:11px;color:#7289a1}
@@ -292,6 +298,7 @@
  .more-link+.more-link:before{content:'';position:absolute;top:0;left:57px;right:0;border-top:1px solid #e5e5ea}
  .more-link>svg:first-child{width:29px;height:29px;padding:5px;border-radius:7px;background:#173e65;color:#fff;stroke-width:1.9}
  .more-link:nth-child(2)>svg:first-child{background:#4f6b89}.more-link:nth-child(3)>svg:first-child{background:#8296ad}.more-link:nth-child(4)>svg:first-child{background:#678a99}.more-link:nth-child(5)>svg:first-child{background:#4d6789}.more-link:nth-child(6)>svg:first-child{background:#9ab0c5}
+ .more-link:nth-child(n)>svg:first-child{background:#e7eef6;color:#466683;border-radius:10px}
  .more-link>svg:last-child{display:block;width:12px;height:12px;color:#c7c7cc;margin-left:auto}
  .more-link span{font-size:16px;font-weight:400;letter-spacing:-.25px}
  .more-link small{font-size:12px;color:#8e8e93;margin-top:4px;line-height:1.3}
