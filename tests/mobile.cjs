@@ -29,9 +29,17 @@ const legacy = { read: ['budget-may-1'], saved: ['budget-may-1'], notes: { plan:
 const a = boot({ 'deputat-materials-v1': JSON.stringify(legacy) });
 const { q, w, go, follow } = a;
 assert.equal(q('#mobile-navigation').children.length, 5);
-assert.equal(q('.mobile-launches').children.length, 3);
+assert.equal(q('.mobile-launches').children.length, 4);
 assert.equal(q('#mobile-navigation [aria-current="page"]').hash, '#overview');
 assert.equal(w.PUBLIC_MUNICIPAL_NEWS.length, 3, 'retain all current public publications');
+q('.ios-search').click();
+assert(q('#search-dialog').open, 'home search opens the existing global search');
+q('#search-dialog').close();
+q('.ios-checklist [data-check="0"]').click();
+assert.equal(q('.ios-checklist [data-check="0"]').getAttribute('aria-pressed'), 'true');
+assert.deepEqual(JSON.parse(w.localStorage.getItem('deputat-start')), [0]);
+q('.ios-checklist [data-check="0"]').click();
+assert.deepEqual(JSON.parse(w.localStorage.getItem('deputat-start')), []);
 
 q('#more-open').click();
 assert(q('#more-dialog').open);
