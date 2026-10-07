@@ -9,6 +9,7 @@
 <link rel="preload" as="image" href="assets/background.webp" type="image/webp" fetchpriority="high">
 <link rel="stylesheet" href="style.css">
 <link rel="stylesheet" href="materials.css">
+<link rel="stylesheet" href="mobile.css?v=20261007">
 </head>
 <body>
 <div class="backdrop" aria-hidden="true"></div>
@@ -19,8 +20,10 @@
 <nav aria-label="Основная навигация" id="navigation"></nav>
 <div class="sidebar-bottom"><div class="territory"><span class="tiny-star">✳</span><span>Канский округ<small>Красноярский край</small></span></div><button class="profile" data-detail="profile"><span class="avatar">ИФ</span><span>Иван Фомин<small>Руководитель фракции ЛДПР</small></span></button></div>
 </aside>
-<main id="main"><header class="topbar"><span id="breadcrumb">Обзор</span><div class="topbar-right"><time id="today"></time><button class="icon-button" id="search-open" aria-label="Поиск по кабинету"></button></div></header><div id="content"></div><footer><span>Канский окружной Совет · I созыв</span><button data-detail="sources">Справочник: 29.09 · подборка: 01.10.2026</button></footer></main>
+<main id="main"><header class="topbar"><div class="app-title"><span class="mobile-mark" aria-hidden="true">д.</span><span><span class="mobile-title">Мой кабинет</span><span id="breadcrumb">Обзор</span></span></div><div class="topbar-right"><time id="today"></time><button class="icon-button" id="search-open" aria-label="Поиск по кабинету"></button><button class="mobile-profile avatar" data-detail="profile" aria-label="Мой профиль">ИФ</button></div></header><div id="content"></div><footer><span>Канский окружной Совет · I созыв</span><button data-detail="sources">Справочник: 29.09 · подборка: 01.10.2026</button></footer></main>
 </div>
+<nav id="mobile-navigation" class="mobile-tabs" aria-label="Навигация на телефоне"></nav>
+<dialog id="more-dialog" class="detail-dialog more-dialog" aria-labelledby="more-title"><div class="dialog-top"><div><span class="eyebrow">МОЙ КАБИНЕТ</span><h2 id="more-title">Все разделы</h2></div><button class="icon-button" id="more-close" aria-label="Закрыть меню"></button></div><div id="more-links"></div><button class="more-profile" data-detail="profile"><span class="avatar">ИФ</span><span>Иван Фомин<small>Канский окружной Совет</small></span></button></dialog>
 <dialog id="detail-dialog" class="detail-dialog"><div class="dialog-top"><span class="eyebrow" id="dialog-label">СПРАВОЧНИК</span><button class="icon-button" id="dialog-close" aria-label="Закрыть"></button></div><div id="dialog-body"></div></dialog>
 <dialog id="search-dialog" class="search-dialog"><div class="search-row"><span id="search-icon"></span><input id="search-input" type="search" placeholder="Сессии, помощники, удостоверение…" aria-label="Поиск по кабинету"><button class="icon-button" id="search-close" aria-label="Закрыть поиск"></button></div><div id="search-results"></div></dialog>
 <div id="toast" role="status" aria-live="polite"></div>
@@ -29,5 +32,5 @@
 <script src="public-news.js"></script>
 <script src="material-status.js"></script>
 <script src="materials.js"></script>
-<script src="app.js"></script>
+<script src="app.js?v=20261007-mobile"></script>
 </body></html>
