@@ -1,0 +1,25 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="220" height="220" viewBox="0 0 220 220">
+<defs>
+ <linearGradient id="metal" x1="0" y1="0" x2="1" y2=".3"><stop stop-color="#526c82"/><stop offset=".2" stop-color="#c6d5df"/><stop offset=".43" stop-color="#f5f9fc"/><stop offset=".57" stop-color="#b3c6d5"/><stop offset="1" stop-color="#36546d"/></linearGradient>
+ <linearGradient id="edge" x2=".3" y2="1"><stop stop-color="#ebf5ff"/><stop offset=".5" stop-color="#7f9aaf"/><stop offset="1" stop-color="#3d5a71"/></linearGradient>
+ <linearGradient id="roof" x2="1" y2="1"><stop stop-color="#d5e4ed"/><stop offset=".5" stop-color="#809bac"/><stop offset="1" stop-color="#234158"/></linearGradient>
+ <linearGradient id="step" x2="0" y2="1"><stop stop-color="#d4e3eb"/><stop offset=".4" stop-color="#829cae"/><stop offset=".5" stop-color="#466279"/><stop offset="1" stop-color="#203d55"/></linearGradient>
+</defs>
+<g transform="translate(19 20) rotate(10 90 95)">
+ <path d="M18 66 87 17 166 58 170 70 87 35 21 78Z" fill="url(#roof)"/>
+ <path d="m18 66 69-49 79 41-79-32Z" fill="#e2edf4" opacity=".75"/>
+ <path d="M29 74 87 36 153 68Z" fill="#345269"/>
+ <path d="m47 68 40-24 44 24Z" fill="url(#edge)"/>
+ <rect x="19" y="75" width="151" height="9" rx="2" fill="url(#metal)"/>
+ <g fill="url(#metal)">
+  <rect x="31" y="92" width="20" height="70" rx="5"/><rect x="66" y="92" width="20" height="70" rx="5"/>
+  <rect x="103" y="92" width="20" height="70" rx="5"/><rect x="139" y="92" width="20" height="70" rx="5"/>
+ </g>
+ <g fill="url(#edge)">
+  <rect x="27" y="84" width="28" height="10" rx="2"/><rect x="62" y="84" width="28" height="10" rx="2"/><rect x="99" y="84" width="28" height="10" rx="2"/><rect x="135" y="84" width="28" height="10" rx="2"/>
+  <rect x="28" y="160" width="26" height="7" rx="2"/><rect x="63" y="160" width="26" height="7" rx="2"/><rect x="100" y="160" width="26" height="7" rx="2"/><rect x="136" y="160" width="26" height="7" rx="2"/>
+ </g>
+ <rect x="19" y="167" width="151" height="10" rx="2" fill="url(#step)"/>
+ <rect x="12" y="177" width="166" height="10" rx="2" fill="url(#step)"/>
+ <path d="M12 177h166M19 167h151M19 75h151" stroke="#e8f3fd" stroke-opacity=".6"/>
+</g></svg>
